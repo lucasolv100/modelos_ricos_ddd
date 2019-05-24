@@ -9,5 +9,6 @@ namespace PaymentsContext.Domain.Entities
         public DateTime LastUpdateDate { get; set; }
         public DateTime? ExpireDate { get; set; }
         public List<Payment> Payments { get; set; }
+        public bool Active { get; set; }
     }
 }

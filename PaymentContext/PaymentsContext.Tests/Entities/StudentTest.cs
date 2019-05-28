@@ -11,6 +11,7 @@ namespace PaymentsContext.Tests.Entities
         [TestMethod]
         public void TestMethod1()
         {
+            var subscription = new Subscription(null);
             var student = new Student(
                 firstName:"Lucas",
                 lastName:"Souza",

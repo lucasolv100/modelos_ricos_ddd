@@ -48,7 +48,7 @@ namespace PaymentsContext.Domain.Handlers
             var document = new Document(command.Document, EDocumentType.CPF);
             var email = new Email(command.Email);
             var address = new Address(command.Street, command.Number, command.Neighborhood, command.City, command.State, command.ZipCode);
-            
+
             //Gerar as entidades
             var student = new Student(name, document, email);
             var subscription = new Subscription(DateTime.Now.AddMonths(1));
@@ -71,6 +71,11 @@ namespace PaymentsContext.Domain.Handlers
 
             //Aplicar as validações;
             AddNotifications(name, email, document, address, payment, student, subscription);
+
+            //Checar as validações
+            if (Invalid)
+                return new CommandResult(false, "Não foi possivel realizar a assinatura!");
+
 
             //Salvar as informações;
             _repository.CreateSubscription(student);

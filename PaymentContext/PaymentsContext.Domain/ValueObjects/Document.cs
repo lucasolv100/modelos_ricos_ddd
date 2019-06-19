@@ -20,6 +20,7 @@ namespace PaymentsContext.Domain.ValueObjects
         public string Number { get; private set; }
         public EDocumentType Type { get; private set; }
 
+        //TODO: terminar de implementar as validações para cada tipo de documento
         private bool ValidateDocument()
         {
             if (Type == EDocumentType.CNPJ && Number.Length == 14)

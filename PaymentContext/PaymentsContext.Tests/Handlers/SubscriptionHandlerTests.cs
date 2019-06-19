@@ -2,15 +2,18 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PaymentsContext.Domain.Commands;
 using PaymentsContext.Domain.Enums;
+using PaymentsContext.Domain.Handlers;
+using PaymentsContext.Tests.Mocks;
 
-namespace PaymentsContext.Tests.Commands
+namespace PaymentsContext.Tests.Handlers
 {
     [TestClass]
-    public class CreateBoletoSubscriptionCommandTests
+    public class SubscriptionHandlerTests
     {
         [TestMethod]
-        public void ShouldReturnErrorWhenNameIsInvalid()
+        public void ShouldReturnErrorWhenDocumentExists()
         {
+            var handler = new SubscriptionHandler(new FakeStudentRespository(), new FakeEmailService());
             var command = new CreateBoletoSubscriptionCommand(
                 "Lucas",
                 "Souza",
@@ -34,10 +37,9 @@ namespace PaymentsContext.Tests.Commands
                 "13190000",
                 "teste@teste.com"
             );
-            
-            command.Validate();
 
-            Assert.AreEqual(false, command.Valid);
+            handler.Handle(command);
+            Assert.AreEqual(false, handler.Valid);
         }
     }
 }
